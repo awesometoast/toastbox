@@ -1,13 +1,12 @@
-# Bootbox - Bootstrap powered alert, confirm and flexible dialog boxes
+# Toastbox - Bootstrap powered alert, confirm and flexible dialog boxes
+This is a fork of [Bootbox](https://github.com/makeusabrew/bootbox), but specifically for use with Bootstrap 5.
 
-Please see http://bootboxjs.com for full usage instructions, or head over to http://paynedigital.com/bootbox for
+Please see http://bootboxjs.com for original usage instructions, or head over to http://paynedigital.com/bootbox for
 the original writeup about the project.
 
-## Contact
+## Credit
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/makeusabrew/bootbox?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-The easiest thing is to [find me on twitter @makeusabrew](http://twitter.com/makeusabrew).
+Original Bootbox project made by [@makeusabrew](http://twitter.com/makeusabrew).
 
 ## Contributing
 
@@ -24,13 +23,7 @@ pull requests **please** ensure your tests pass as failing requests will be reje
 
 ## A note on Bootstrap dependencies
 
-Bootbox **5.0.0** is the first release to support Bootstrap 4.0.0.
-
-Bootbox **4.0.0** is the first release to support Bootstrap 3.0.0.
-
-Bootbox **3.3.0** is the *last* release to support Bootstrap 2.2.x.
-
-Much more dependency information can be found [on the Bootbox website](http://bootboxjs.com/getting-started.html#bootbox-dependencies).
+Dependency information can be found [on the Bootbox website](http://bootboxjs.com/getting-started.html#bootbox-dependencies).
 
 ## 5.5.3 (Latest Release)
 
