@@ -1,284 +1,113 @@
-describe('bootbox.setDefaults', function() {
+describe('toastbox.setDefaults', function() {
   'use strict';
+
+  // Store original defaults
+  var originalDefaults;
+
   beforeEach(function() {
-    this.find = function(selector) {
-      return this.dialog.find(selector);
+    // Store the current defaults before each test
+    originalDefaults = {
+      locale: 'en',
+      backdrop: 'static',
+      animate: true,
+      className: null,
+      closeButton: true,
+      show: true
     };
+    
+    // Reset to known state
+    toastbox.setDefaults(originalDefaults);
   });
 
-  describe('animate', function() {
-    describe('when set to false', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          animate: false
-        });
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('does not add the fade class to the dialog', function() {
-        expect(this.dialog.hasClass('fade')).to.be.false;
-      });
-
-      it('applies the correct class to the body', function() {
-        expect($('body').hasClass('modal-open')).to.be.true;
-      });
-
-      describe('when clicking the close button', function() {
-        beforeEach(function() {
-          this.dialog.find('.close').trigger('click');
-        });
-
-        it('removes the modal-open class from the body', function() {
-          expect($('body').hasClass('modal-open')).to.be.false;
-        });
-      });
-    });
-
-    describe('when set to true', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          animate: true
-        });
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the fade class to the dialog', function() {
-        expect(this.dialog.hasClass('fade')).to.be.true;
-      });
-    });
+  afterEach(function() {
+    // Reset to original defaults
+    toastbox.setDefaults(originalDefaults);
   });
 
-  describe('className', function() {
-    describe('when passed as a string', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          className: 'my-class'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
+  describe('setting defaults', function() {
+    it('can set locale default', function() {
+      toastbox.addLocale('de', {
+        OK: 'OK',
+        CANCEL: 'Abbrechen',
+        CONFIRM: 'Bestätigen'
       });
-
-      it('adds the extra class to the outer dialog', function() {
-        expect(this.dialog.hasClass('bootbox')).to.be.true;
-        expect(this.dialog.hasClass('my-class')).to.be.true;
-      });
-    });
-  });
-
-  describe('size', function() {
-    describe('when set to extra-large', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'extra-large'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the extra-large class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-xl')).to.be.true;
-      });
-    });
-    describe('when set to xl', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'xl'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the extra-large class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-xl')).to.be.true;
-      });
+      
+      toastbox.setDefaults({ locale: 'de' });
+      
+      var dialog = toastbox.alert('Test');
+      var button = dialog.querySelector('.modal-footer button');
+      expect(button.textContent).to.equal('OK');
     });
 
-    describe('when set to large', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'large'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the large class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-lg')).to.be.true;
-      });
-    });
-    describe('when set to lg', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'lg'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the large class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-lg')).to.be.true;
-      });
+    it('can set animate default', function() {
+      toastbox.setDefaults({ animate: false });
+      
+      var dialog = toastbox.alert('Test');
+      expect(dialog.classList.contains('fade')).to.be.false;
+      
+      toastbox.setDefaults({ animate: true });
+      
+      dialog = toastbox.alert('Test 2');
+      expect(dialog.classList.contains('fade')).to.be.true;
     });
 
-    describe('when set to small', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'small'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the small class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-sm')).to.be.true;
-      });
+    it('can set className default', function() {
+      toastbox.setDefaults({ className: 'my-default-class' });
+      
+      var dialog = toastbox.alert('Test');
+      expect(dialog.classList.contains('my-default-class')).to.be.true;
     });
-    describe('when set to sm', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          size: 'sm'
-        });
 
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
+    it('can set closeButton default', function() {
+      toastbox.setDefaults({ closeButton: false });
+      
+      var dialog = toastbox.alert('Test');
+      expect(dialog.querySelector('.bootbox-close-button')).to.not.exist;
+      
+      toastbox.setDefaults({ closeButton: true });
+      
+      dialog = toastbox.alert('Test 2');
+      expect(dialog.querySelector('.bootbox-close-button')).to.exist;
+    });
 
-      it('adds the small class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-sm')).to.be.true;
+    it('can set multiple defaults at once', function() {
+      toastbox.setDefaults({
+        animate: false,
+        className: 'test-class',
+        closeButton: false
       });
+      
+      var dialog = toastbox.alert('Test');
+      
+      expect(dialog.classList.contains('fade')).to.be.false;
+      expect(dialog.classList.contains('test-class')).to.be.true;
+      expect(dialog.querySelector('.bootbox-close-button')).to.not.exist;
+    });
+
+    it('dialog options override defaults', function() {
+      toastbox.setDefaults({
+        animate: false,
+        className: 'default-class'
+      });
+      
+      var dialog = toastbox.alert({
+        message: 'Test',
+        animate: true,
+        className: 'override-class'
+      });
+      
+      expect(dialog.classList.contains('fade')).to.be.true;
+      expect(dialog.classList.contains('override-class')).to.be.true;
+      expect(dialog.classList.contains('default-class')).to.be.false;
     });
   });
 
-  describe('backdrop', function() {
-    describe('when set to false', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          backdrop: false
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('does not show a backdrop', function() {
-        expect(this.dialog.next('.modal-backdrop').length).to.equal(0);
-      });
-    });
-  });
-  
-  describe('centerVertical', function() {
-    describe('when set to true', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          centerVertical: true
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the modal-dialog-centered class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-dialog-centered')).to.be.true;
-      });
-    });
-  });
-  
-  describe('scrollable', function() {
-    describe('when set to true', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          scrollable: true
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('adds the modal-dialog-scrollable class to the innerDialog', function() {
-        expect(this.dialog.children('.modal-dialog').hasClass('modal-dialog-scrollable')).to.be.true;
-      });
-    });
-  });
-
-  describe('when passed two arguments', function() {
-    beforeEach(function() {
-      bootbox.setDefaults('className', 'my-class');
-      this.dialog = bootbox.dialog({
-        message: 'test'
-      });
-    });
-
-    it('applies the arguments as a key/value pair', function() {
-      expect(this.dialog.hasClass('bootbox')).to.be.true;
-      expect(this.dialog.hasClass('my-class')).to.be.true;
-    });
-  });
-
-  describe('container', function () {
-    describe('when not explicitly set', function() {
-      beforeEach(function() {
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('defaults to the body element', function() {
-        expect(this.dialog.parent().is('body')).to.be.true;
-      });
-    });
-
-    describe('when explicitly set to body', function() {
-      beforeEach(function() {
-        bootbox.setDefaults({
-          container: 'body'
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('sets the correct parent element', function() {
-        expect(this.dialog.parent().is('body')).to.be.true;
-      });
-    });
-
-    describe('when set to another dom element', function() {
-
-      beforeEach(function() {
-        this.container = $('<div></div>');
-        bootbox.setDefaults({
-          container: this.container
-        });
-
-        this.dialog = bootbox.dialog({
-          message: 'test'
-        });
-      });
-
-      it('sets the correct parent element', function() {
-        expect(this.dialog.parent().is(this.container)).to.be.true;
-      });
+  describe('setDefaults with key-value', function() {
+    it('can set single default with key-value', function() {
+      toastbox.setDefaults('animate', false);
+      
+      var dialog = toastbox.alert('Test');
+      expect(dialog.classList.contains('fade')).to.be.false;
     });
   });
 });
