@@ -1,6 +1,6 @@
 {
-  "name": "bootbox.js",
-  "main": "./bootbox.js",
+  "name": "toastbox.js",
+  "main": "./dist/toastbox.js",
   "license": "MIT",
   "ignore": [
     "CHANGELOG.md",
@@ -12,6 +12,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": ">= 3.3.7"
+    "bootstrap": ">= 4.6.1"
   }
 }

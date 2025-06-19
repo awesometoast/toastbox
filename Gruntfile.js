@@ -1,6 +1,37 @@
 module.exports = function (grunt) {
     'use strict';
     grunt.initConfig({
+        concat: {
+            copy : {
+                src: ['toastbox.js'],
+                dest: 'dist/toastbox.js'
+            },
+
+            locales: {
+                src: ['templates/umd-header-locales.txt', 'locales/**/*.js', 'templates/umd-footer.txt'],
+                dest: 'dist/toastbox.locales.js'
+            },
+
+            all : {
+                src: ['toastbox.js', 'dist/toastbox.locales.js'],
+                dest: 'dist/toastbox.all.js'
+            },
+
+            license : {
+                src: ['LICENSE.md'],
+                dest: 'dist/LICENSE.md'
+            },
+        },
+
+        jsbeautifier : {
+            src : ['dist/toastbox.locales.js','dist/toastbox.all.js'],
+            options:{
+                js: {
+                    indentSize: 2
+                }
+            }
+        },
+
         uglify: {
             options: {
                 compress: true,
@@ -12,9 +43,9 @@ module.exports = function (grunt) {
             },
             my_target: {
                 files: {
-                    'dist/bootbox.min.js': ['bootbox.js'],
-                    'dist/bootbox.locales.min.js': ['bootbox.locales.js'],
-                    'dist/bootbox.all.min.js': ['bootbox.all.js']
+                    'dist/toastbox.min.js': ['dist/toastbox.js'],
+                    'dist/toastbox.locales.min.js': ['dist/toastbox.locales.js'],
+                    'dist/toastbox.all.min.js': ['dist/toastbox.all.js']
                 }
             }
         },
@@ -24,19 +55,21 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc',
                 force: true
             },
-            all: ['bootbox.js', 'bootbox.locales.js', 'bootbox.all.js']
+            all: ['dist/toastbox.js', 'dist/toastbox.locales.js']
         },
 
         karma: {
-            unit: {
+            current: {
                 configFile: 'karma.conf.js'
             }
-        }
+        },
     });
 
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
 
-    grunt.registerTask('default', ['uglify', 'jshint', 'karma']);
-};  
+    grunt.registerTask('default', ['concat', 'jsbeautifier', 'uglify', 'jshint', 'karma']);
+};

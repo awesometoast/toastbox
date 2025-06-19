@@ -1,17 +1,40 @@
-## Submitting Pull Requests
+# Contributing to Toastbox
 
-**Please follow these basic steps to simplify pull request reviews - if you don't you'll probably just be asked to anyway.**
+Thank you for your interest in contributing to Toastbox! This project is a fork of the [Bootbox](https://github.com/bootboxjs/bootbox) library by Nick Payne.
 
-* Please rebase your branch against the current master
-* Run ```npm install``` to make sure your development dependencies are up-to-date
-* [grunt-cli](https://github.com/gruntjs/grunt-cli) >= 0.4.0 is required to sanity check your contribution
-* Please ensure that the test suite passes **and** that bootbox.js is lint free before submitting a PR by running:
- * ```grunt```
-* If you've added new functionality, **please** include tests which validate its behaviour
- * **this includes pull requests which _only_ add new locales!**
+## Getting Started
 
-## Submitting bug reports
+1. Fork the repository
+2. Clone your fork locally
+3. Install dependencies: `npm install`
+4. Run tests: `npm test`
 
-* Where at all possible, please try and provide a link to a jsfiddle.net example or similar
-* Please detail the affected browser(s) and operating system(s)
-* Please be sure to state which version of Bootbox, jQuery **and** Bootstrap you're using
+## Guidelines
+
+### Code Style
+- Follow existing code patterns
+- Use modern JavaScript (ES6+)
+- Maintain Bootstrap 5.3+ compatibility
+- Avoid jQuery dependencies
+
+### Testing
+- All changes must include appropriate tests
+- Ensure all existing tests pass
+- Run `npm test` before submitting
+
+### Pull Requests
+- Provide clear description of changes
+- Reference any related issues
+- Keep changes focused and atomic
+
+## Focus Areas
+
+This fork specifically targets:
+- Bootstrap 5.3+ compatibility
+- jQuery-free implementation
+- Modern web standards
+- Performance optimization
+
+## Questions?
+
+Feel free to open an issue for discussion before major changes.

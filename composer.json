@@ -1,12 +1,11 @@
 {
-  "name": "makeusabrew/bootbox",
+  "name": "awesometoast/toastbox",
   "type": "component",
-  "description": "Wrappers for JavaScript alert(), confirm() and other flexible dialogs using the Bootstrap framework",
+  "description": "Wrappers for JavaScript alert(), confirm(), prompt(), and other flexible dialogs using the Bootstrap 5 framework that does not require jQuery. This is a fork of Bootboxjs by Nick Payne.",
   "license": "MIT",
   "authors": [
     {
-      "name": "Nick Payne",
-      "email": "nick@kurai.co.uk"
+      "name": "awesometoast"
     }
   ],
   "require": {
@@ -15,8 +14,8 @@
   "extra": {
     "component": {
       "scripts": [
-        "bootbox.js",
-        "bootbox.locales.js"
+        "dist/toastbox.js",
+        "dist/toastbox.locales.js"
       ]
     }
   }

@@ -1,5 +1,6 @@
 /**
- * bootbox.js 5.5.3
- *
- * http://bootboxjs.com/license.txt
+ * Toastbox.js — alert, confirm, prompt, and flexible dialogs for the Bootstrap 5 framework
+ * @version: 2.0.0
+ * @project: https://github.com/awesometoast/toastbox
+ * @license: MIT
  */
