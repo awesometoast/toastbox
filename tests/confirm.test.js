@@ -15,7 +15,7 @@ describe('toastbox.confirm', function() {
       });
       
       expect(dialog).to.exist;
-      expect(dialog.querySelector('.bootbox-body').textContent).to.equal('Are you sure?');
+      expect(dialog.querySelector('.toastbox-body').textContent).to.equal('Are you sure?');
     });
 
     it('has Cancel and OK buttons', function() {
@@ -36,13 +36,13 @@ describe('toastbox.confirm', function() {
       expect(buttons[1].classList.contains('btn-primary')).to.be.true;
     });
 
-    it('has bootbox-confirm class', function() {
+    it('has toastbox-confirm class', function() {
       var dialog = toastbox.confirm({
         message: 'Test',
         callback: function() {}
       });
       
-      expect(dialog.classList.contains('bootbox-confirm')).to.be.true;
+      expect(dialog.classList.contains('toastbox-confirm')).to.be.true;
     });
   });
 

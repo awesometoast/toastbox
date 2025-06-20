@@ -4,9 +4,7 @@
   "description": "Wrappers for JavaScript alert(), confirm(), prompt(), and other flexible dialogs using the Bootstrap 5 framework that does not require jQuery. This is a fork of Bootboxjs by Nick Payne.",
   "keywords": ["bootstrap", "dialog", "modal", "confirm", "alert", "prompt", "javascript", "ui"],
   "license": "MIT",
-  "require": {
-    "components/bootstrap": ">=5.3"
-  },
+  "require": {},
   "suggest": {
     "symfony/asset-mapper": "For using toastbox with Symfony AssetMapper"
   },

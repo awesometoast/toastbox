@@ -62,12 +62,12 @@ describe('toastbox.setDefaults', function() {
       toastbox.setDefaults({ closeButton: false });
       
       var dialog = toastbox.alert('Test');
-      expect(dialog.querySelector('.bootbox-close-button')).to.not.exist;
+      expect(dialog.querySelector('.toastbox-close-button')).to.not.exist;
       
       toastbox.setDefaults({ closeButton: true });
       
       dialog = toastbox.alert('Test 2');
-      expect(dialog.querySelector('.bootbox-close-button')).to.exist;
+      expect(dialog.querySelector('.toastbox-close-button')).to.exist;
     });
 
     it('can set multiple defaults at once', function() {
@@ -81,7 +81,7 @@ describe('toastbox.setDefaults', function() {
       
       expect(dialog.classList.contains('fade')).to.be.false;
       expect(dialog.classList.contains('test-class')).to.be.true;
-      expect(dialog.querySelector('.bootbox-close-button')).to.not.exist;
+      expect(dialog.querySelector('.toastbox-close-button')).to.not.exist;
     });
 
     it('dialog options override defaults', function() {

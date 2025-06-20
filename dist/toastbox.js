@@ -33,26 +33,26 @@
   };
 
   let templates = {
-    dialog:         '<div class="bootbox modal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="bootbox-body"></div></div></div></div></div>',
+    dialog:         '<div class="toastbox modal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="toastbox-body"></div></div></div></div></div>',
     header:         '<div class="modal-header"><h5 class="modal-title"></h5></div>',
     footer:         '<div class="modal-footer"></div>',
-    closeButton:    '<button type="button" class="bootbox-close-button close btn-close" aria-hidden="true" aria-label="Close"></button>',
-    form:           '<form class="bootbox-form"></form>',
+    closeButton:    '<button type="button" class="toastbox-close-button close btn-close" aria-hidden="true" aria-label="Close"></button>',
+    form:           '<form class="toastbox-form"></form>',
     button:         '<button type="button" class="btn"></button>',
     option:         '<option value=""></option>',
-    promptMessage:  '<div class="bootbox-prompt-message"></div>',
+    promptMessage:  '<div class="toastbox-prompt-message"></div>',
     inputs: {
-      text:         '<input class="bootbox-input bootbox-input-text form-control" autocomplete="off" type="text">',
-      textarea:     '<textarea class="bootbox-input bootbox-input-textarea form-control"></textarea>',
-      email:        '<input class="bootbox-input bootbox-input-email form-control" autocomplete="off" type="email">',
-      select:       '<select class="bootbox-input bootbox-input-select form-select"></select>',
-      checkbox:     '<div class="form-check checkbox"><label class="form-check-label"><input class="form-check-input bootbox-input bootbox-input-checkbox" type="checkbox"></label></div>',
-      radio:        '<div class="form-check radio"><label class="form-check-label"><input class="form-check-input bootbox-input bootbox-input-radio" type="radio" name="bootbox-radio"></label></div>',
-      date:         '<input class="bootbox-input bootbox-input-date form-control" autocomplete="off" type="date">',
-      time:         '<input class="bootbox-input bootbox-input-time form-control" autocomplete="off" type="time">',
-      number:       '<input class="bootbox-input bootbox-input-number form-control" autocomplete="off" type="number">',
-      password:     '<input class="bootbox-input bootbox-input-password form-control" autocomplete="off" type="password">',
-      range:        '<input class="bootbox-input bootbox-input-range form-control-range" autocomplete="off" type="range">'
+      text:         '<input class="toastbox-input toastbox-input-text form-control" autocomplete="off" type="text">',
+      textarea:     '<textarea class="toastbox-input toastbox-input-textarea form-control"></textarea>',
+      email:        '<input class="toastbox-input toastbox-input-email form-control" autocomplete="off" type="email">',
+      select:       '<select class="toastbox-input toastbox-input-select form-select"></select>',
+      checkbox:     '<div class="form-check checkbox"><label class="form-check-label"><input class="form-check-input toastbox-input toastbox-input-checkbox" type="checkbox"></label></div>',
+      radio:        '<div class="form-check radio"><label class="form-check-label"><input class="form-check-input toastbox-input toastbox-input-radio" type="radio" name="toastbox-radio"></label></div>',
+      date:         '<input class="toastbox-input toastbox-input-date form-control" autocomplete="off" type="date">',
+      time:         '<input class="toastbox-input toastbox-input-time form-control" autocomplete="off" type="time">',
+      number:       '<input class="toastbox-input toastbox-input-number form-control" autocomplete="off" type="number">',
+      password:     '<input class="toastbox-input toastbox-input-password form-control" autocomplete="off" type="password">',
+      range:        '<input class="toastbox-input toastbox-input-range form-control-range" autocomplete="off" type="range">'
     }
   };
 
@@ -233,7 +233,7 @@
    * @returns The current bootbox object
    */
   exports.hideAll = function () {
-    document.querySelectorAll('.bootbox').forEach(function(modal) {
+    document.querySelectorAll('.toastbox').forEach(function(modal) {
       let bsModal = bootstrap.Modal.getInstance(modal);
       if (bsModal) {
         bsModal.hide();
@@ -302,13 +302,13 @@
       onEscape: options.onEscape
     };
 
-    let bootboxBody = body.querySelector('.bootbox-body');
+    let toastboxBody = body.querySelector('.toastbox-body');
     if (options.message instanceof Element) {
       // If message is a DOM element, append it directly
-      bootboxBody.appendChild(options.message);
+      toastboxBody.appendChild(options.message);
     } else {
       // If message is a string, set innerHTML
-      bootboxBody.innerHTML = options.message;
+      toastboxBody.innerHTML = options.message;
     }
 
     // Only attempt to create buttons if at least one has been defined in the options object
@@ -321,11 +321,11 @@
         switch (key) {
           case 'ok':
           case 'confirm':
-            button.classList.add('bootbox-accept');
+            button.classList.add('toastbox-accept');
             break;
 
           case 'cancel':
-            button.classList.add('bootbox-cancel');
+            button.classList.add('toastbox-cancel');
             break;
         }
 
@@ -382,12 +382,30 @@
       innerDialog.classList.add('modal-dialog-scrollable');
     }
 
+    // Check if we need a header for title, close button, or to display message when no title
     if(options.title || options.closeButton) {
       if (options.title) {
         header.querySelector('.modal-title').innerHTML = options.title;
+        // Add class to indicate title is present for CSS styling
+        header.classList.add('toastbox-has-title');
       }
       else {
         header.classList.add('border-0');
+        // Special case for alerts only: if no title but we have a message, replace the h5.modal-title with a div containing the message
+        if (typeof options.message === 'string' && options.className && options.className.split(' ')[0] === 'toastbox-alert') {
+          // Remove the h5.modal-title and replace with a div for the message
+          let modalTitle = header.querySelector('.modal-title');
+          let messageDiv = document.createElement('div');
+          messageDiv.className = 'toastbox-header-message';
+          messageDiv.innerHTML = options.message;
+          modalTitle.parentNode.replaceChild(messageDiv, modalTitle);
+          // Clear the message from the body since it's now in the header
+          toastboxBody.innerHTML = '';
+          // Hide the modal body to prevent empty space
+          body.style.display = 'none';
+          // Add class to indicate message in header for CSS styling
+          header.classList.add('toastbox-has-header-message');
+        }
       }
 
       if (options.closeButton) {
@@ -494,7 +512,7 @@
     });
 
     dialog.addEventListener('click', function (e) {
-      if (e.target.closest('.bootbox-close-button')) {
+      if (e.target.closest('.toastbox-close-button')) {
         // onEscape might be falsy, but that's fine; the fact is if the user has managed to click the close button we have to close the dialog, callback or not
         processCallback(e, dialog, callbacks.onEscape);
       }
@@ -825,7 +843,7 @@
 
         // Checkboxes have to nest within a containing element, so they break the rules a bit and we end up re-assigning our 'input' element to this container instead
         input = document.createElement('div');
-        input.className = 'bootbox-checkbox-list';
+        input.className = 'toastbox-checkbox-list';
 
         each(inputOptions, function (_, option) {
           if (option.value === undefined || option.text === undefined) {
@@ -862,7 +880,7 @@
 
         // Radiobuttons have to nest within a containing element, so they break the rules a bit and we end up re-assigning our 'input' element to this container instead
         input = document.createElement('div');
-        input.className = 'bootbox-radiobutton-list';
+        input.className = 'toastbox-radiobutton-list';
 
         // Radiobuttons should always have an initial checked input checked in a "group".
         // If value is undefined or doesn't match an input option, select the first radiobutton
@@ -907,7 +925,7 @@
 
       // @TODO can we actually click *the* button object instead?
       // e.g. buttons.confirm.click() or similar
-      let acceptButton = promptDialog.querySelector('.bootbox-accept');
+      let acceptButton = promptDialog.querySelector('.toastbox-accept');
       if (acceptButton) {
         acceptButton.click();
       }
@@ -1004,7 +1022,7 @@
 
     // Build up a base set of dialog properties
     let baseOptions = {
-      className: 'bootbox-' + className,
+      className: 'toastbox-' + className,
       buttons: createLabels(labels, locale)
     };
     
@@ -1169,7 +1187,7 @@
 
 
   function focusPrimaryButton(e, dialog) {
-    let acceptButton = dialog.querySelector('.bootbox-accept');
+    let acceptButton = dialog.querySelector('.toastbox-accept');
     if (acceptButton) {
       acceptButton.focus();
     }

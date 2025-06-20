@@ -14,9 +14,9 @@ describe('toastbox.dialog', function() {
       });
       
       expect(dialog).to.exist;
-      expect(dialog.classList.contains('bootbox')).to.be.true;
+      expect(dialog.classList.contains('toastbox')).to.be.true;
       expect(dialog.classList.contains('modal')).to.be.true;
-      expect(dialog.querySelector('.bootbox-body').textContent).to.equal('Test message');
+      expect(dialog.querySelector('.toastbox-body').textContent).to.equal('Test message');
     });
 
     it('adds title when provided', function() {
@@ -105,8 +105,8 @@ describe('toastbox.dialog', function() {
         closeButton: false
       });
       
-      expect(dialogWith.querySelector('.bootbox-close-button')).to.exist;
-      expect(dialogWithout.querySelector('.bootbox-close-button')).to.not.exist;
+      expect(dialogWith.querySelector('.toastbox-close-button')).to.exist;
+      expect(dialogWithout.querySelector('.toastbox-close-button')).to.not.exist;
     });
 
     it('respects size option', function() {
