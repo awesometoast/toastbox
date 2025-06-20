@@ -3,7 +3,6 @@
  * version: 2.0.0
  * author: Awesometoast, forked from Bootbox.js by Nick Payne
  * license: MIT
- * See http://bootboxjs.com/ for usage and documentation
  */
 (function(root, factory) {
   'use strict';

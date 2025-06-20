@@ -23,6 +23,61 @@ We gratefully acknowledge the excellent foundation provided by Nick Payne's orig
 npm install toastbox
 ```
 
+### Composer
+```bash
+composer require awesometoast/toastbox
+```
+
+### Symfony 7 with AssetMapper
+
+1. Install the package:
+```bash
+composer require awesometoast/toastbox
+```
+
+2. The package automatically registers with AssetMapper. You can import it in your JavaScript:
+```javascript
+import toastbox from '@awesometoast/toastbox';
+
+// Or import with locales
+import toastbox from '@awesometoast/toastbox/all';
+
+// Or import locales separately
+import toastbox from '@awesometoast/toastbox';
+import '@awesometoast/toastbox/locales';
+```
+
+3. Use in your Twig templates:
+```twig
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module">
+        import toastbox from '@awesometoast/toastbox';
+
+        // Your toastbox code here
+        toastbox.alert("Hello from Symfony!");
+    </script>
+{% endblock %}
+```
+
+### Laravel / Static HTML
+
+For non-Symfony projects, you can use the dist files directly:
+
+1. If using Composer:
+```bash
+composer require awesometoast/toastbox
+```
+
+2. Include the JavaScript file:
+```html
+<!-- From vendor directory -->
+<script src="vendor/awesometoast/toastbox/dist/toastbox.js"></script>
+
+<!-- Or copy to your public assets -->
+<script src="assets/js/toastbox.js"></script>
+```
+
 ## Usage Examples
 
 ### Basic Alert
