@@ -1,0 +1,17 @@
+/*! @preserve
+ * toastbox.locales.js
+ * version: 1.0.0
+ * author: awesometoast
+ * license: MIT
+ */
+(function (global, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['toastbox'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    factory(require('./toastbox'));
+  } else {
+    factory(global.toastbox);
+  }
+}(this, function (toastbox) {
+  'use strict';

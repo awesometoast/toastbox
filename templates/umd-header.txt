@@ -1,0 +1,20 @@
+/*! @preserve
+ * toastbox.js
+ * version: 1.0.0
+ * author: awesometoast
+ * license: MIT
+ */
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    // Node, CommonJS-like
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals (root is window)
+    root.toastbox = factory(root.jQuery);
+  }
+}(this, function init($, undefined) {
+  'use strict';

@@ -1,0 +1,6 @@
+/**
+ * Toastbox.js — alert, confirm, prompt, and flexible dialogs for the Bootstrap 5 framework
+ * @version: 1.0.0
+ * @project: https://github.com/awesometoast/toastbox
+ * @license: MIT
+ */

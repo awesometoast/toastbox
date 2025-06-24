@@ -1,0 +1,26 @@
+{
+  "name": "awesometoast/toastbox",
+  "type": "library",
+  "description": "Wrappers for JavaScript alert(), confirm(), prompt(), and other flexible dialogs using the Bootstrap 5 framework that does not require jQuery. This is a fork of Bootboxjs by Nick Payne.",
+  "keywords": ["bootstrap", "dialog", "modal", "confirm", "alert", "prompt", "javascript", "ui"],
+  "license": "MIT",
+  "require": {},
+  "suggest": {
+    "symfony/asset-mapper": "For using toastbox with Symfony AssetMapper"
+  },
+  "extra": {
+    "symfony": {
+      "importmap": {
+        "@awesometoast/toastbox": "./dist/toastbox.js",
+        "@awesometoast/toastbox/locales": "./dist/toastbox.locales.js",
+        "@awesometoast/toastbox/all": "./dist/toastbox.all.js"
+      }
+    },
+    "component": {
+      "scripts": [
+        "dist/toastbox.js",
+        "dist/toastbox.locales.js"
+      ]
+    }
+  }
+}

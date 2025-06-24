@@ -1,0 +1,39 @@
+/*!
+ * Toastbox CSS - Additional styles for optimal toastbox appearance
+ * Version: 2.0.3
+ * Requires: Bootstrap 5.3+
+ */
+
+.modal-header {
+  position: relative;
+  align-items: flex-start;
+}
+
+.toastbox-close-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1rem;
+  margin: 0;
+  z-index: 1050;
+}
+
+/* When modal-title is present, center align the close button with the title */
+.modal-header.toastbox-has-title {
+  align-items: center;
+}
+
+.modal-header.toastbox-has-title .toastbox-close-button {
+  top: 38%;
+}
+
+/* Ensure header message has proper spacing when close button is present */
+.toastbox-header-message {
+  margin-right: 2rem; /* Provide space for the close button */
+  padding-right: 0.5rem;
+}
+
+/* Ensure modal title has proper spacing when close button is present */
+.modal-header .modal-title {
+  margin-right: 2rem; /* Provide space for the close button */
+  padding-right: 0.5rem;
+}

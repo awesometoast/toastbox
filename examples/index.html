@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toastbox Examples - Interactive Demo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Toastbox CSS -->
+  <link href="../toastbox.css" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <style>
+    .demo-section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      background-color: #f8f9fa;
+    }
+
+    .demo-section h2 {
+      color: #495057;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 0.375rem;
+      border: 1px solid #e9ecef;
+    }
+
+    .demo-item h4 {
+      color: #6c757d;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .code-example {
+      background-color: #f1f3f4;
+      padding: 0.75rem;
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-demo {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .header-section {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .features-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features-list li {
+      padding: 0.25rem 0;
+    }
+
+    .features-list li:before {
+      content: "✓";
+      color: #28a745;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header-section">
+    <div class="container">
+      <h1 class="display-4 mb-3">Toastbox Examples</h1>
+      <p class="lead">Interactive demos of Toastbox features and functionality</p>
+      <p>Q: Wait, what's Toasbox? A: Well, it's a lightweight, modern alternative to native JavaScript alert, confirm, and prompt dialogs using Bootstrap 5</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Alert Examples -->
+    <section class="demo-section">
+      <h2>Alert Dialogs</h2>
+      <p>Simple notification dialogs with an OK button. Perfect for showing information to users.</p>
+
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Basic Alert</h4>
+          <button class="btn btn-primary btn-demo" onclick="basicAlert()">Show Basic Alert</button>
+          <div class="code-example">toastbox.alert("Hello World! This is a basic alert dialog.");</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Alert with Title</h4>
+          <button class="btn btn-primary btn-demo" onclick="alertWithTitle()">Show Alert with Title</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;title: "Success!",<br>&nbsp;&nbsp;message: "Cool. This alert has both a title and message."<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Alert with Callback</h4>
+          <button class="btn btn-primary btn-demo" onclick="alertWithCallback()">Show Alert with Callback</button>
+          <div class="code-example">toastbox.alert("This alert has a callback function that will execute when dismissed.", function() {<br>&nbsp;&nbsp;// Callback executed when dismissed<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Custom Button Text</h4>
+          <button class="btn btn-primary btn-demo" onclick="alertCustomButton()">Show Custom Button</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;message: "This alert has a custom button label instead of the default 'OK'.",<br>&nbsp;&nbsp;buttons: { ok: { label: "Cool", className: "btn-success" } }<br>});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confirm Examples -->
+    <section class="demo-section">
+      <h2>Confirm Dialogs</h2>
+      <p>Decision dialogs with Cancel and OK buttons.</p>
+
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Basic Confirm</h4>
+          <button class="btn btn-warning btn-demo" onclick="basicConfirm()">Show Basic Confirm</button>
+          <div class="code-example">toastbox.confirm("Are you sure about this?", function(result) {<br>&nbsp;&nbsp;// Handle result<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Confirm with Title</h4>
+          <button class="btn btn-warning btn-demo" onclick="confirmWithTitle()">Show Confirm with Title</button>
+          <div class="code-example">toastbox.confirm({<br>&nbsp;&nbsp;title: "Delete Item",<br>&nbsp;&nbsp;message: "This action cannot be undone. Are you sure you want to delete this amazing item?",<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Custom Button Labels</h4>
+          <button class="btn btn-warning btn-demo" onclick="confirmCustomButtons()">Show Custom Labels</button>
+          <div class="code-example">toastbox.confirm({<br>&nbsp;&nbsp;title: "Save Changes",<br>&nbsp;&nbsp;message: "Uh oh. You have unsaved changes.",<br>&nbsp;&nbsp;buttons: {<br>&nbsp;&nbsp;&nbsp;&nbsp;cancel: { label: "Discard Changes", className: "btn-outline-secondary" },<br>&nbsp;&nbsp;&nbsp;&nbsp;confirm: { label: "Save & Continue", className: "btn-primary" }<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Dangerous Action</h4>
+          <button class="btn btn-danger btn-demo" onclick="dangerousConfirm()">Show Dangerous Confirm</button>
+          <div class="code-example">toastbox.confirm({<br>&nbsp;&nbsp;title: "Super Dangerous Action",<br>&nbsp;&nbsp;message: "This will create the Torment Nexus. This action can't be undone.",<br>&nbsp;&nbsp;className: "text-danger",<br>&nbsp;&nbsp;buttons: {<br>&nbsp;&nbsp;&nbsp;&nbsp;cancel: { label: "Cancel", className: "btn-outline-secondary" },<br>&nbsp;&nbsp;&nbsp;&nbsp;confirm: { label: "Activate Torment", className: "btn-danger" }<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prompt Examples -->
+    <section class="demo-section">
+      <h2>Prompt Dialogs</h2>
+      <p>Input dialogs for collecting data. Supports various input types and validation.</p>
+
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Text Input</h4>
+          <button class="btn btn-info btn-demo" onclick="textPrompt()">Show Text Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Enter Your Name",<br>&nbsp;&nbsp;message: "Please enter your full dang name:",<br>&nbsp;&nbsp;placeholder: "e.g. Homestar Runner",<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Email Input</h4>
+          <button class="btn btn-info btn-demo" onclick="emailPrompt()">Show Email Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Email Address",<br>&nbsp;&nbsp;message: "Please enter your email address:",<br>&nbsp;&nbsp;inputType: "email",<br>&nbsp;&nbsp;placeholder: "DJmankiewicz@homestarrunnerr.com",<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Number Input</h4>
+          <button class="btn btn-info btn-demo" onclick="numberPrompt()">Show Number Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Enter Your Age",<br>&nbsp;&nbsp;message: "Please enter your age in years:",<br>&nbsp;&nbsp;inputType: "number",<br>&nbsp;&nbsp;min: 1,<br>&nbsp;&nbsp;max: 120,<br>&nbsp;&nbsp;placeholder: "25",<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Textarea Input</h4>
+          <button class="btn btn-info btn-demo" onclick="textareaPrompt()">Show Textarea Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Comments",<br>&nbsp;&nbsp;message: "Please share mild feedback:",<br>&nbsp;&nbsp;inputType: "textarea",<br>&nbsp;&nbsp;placeholder: "Enter your highly tempered comments",<br>&nbsp;&nbsp;rows: 4,<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Select Dropdown</h4>
+          <button class="btn btn-info btn-demo" onclick="selectPrompt()">Show Select Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Choose Your Plan",<br>&nbsp;&nbsp;message: "Select a subscription plan:",<br>&nbsp;&nbsp;inputType: "select",<br>&nbsp;&nbsp;inputOptions: [<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "Option 1 - Basic Plan", value: "basic" },<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "Option 2 - Expensive Plan", value: "premium" },<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "Option 3 - Outrageously Expensive Plan", value: "enterprise" }<br>&nbsp;&nbsp;],<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Multiple Checkboxes</h4>
+          <button class="btn btn-info btn-demo" onclick="checkboxPrompt()">Show Checkbox Prompt</button>
+          <div class="code-example">toastbox.prompt({<br>&nbsp;&nbsp;title: "Notification Preferences",<br>&nbsp;&nbsp;message: "Select which notifications you'd like to receive:",<br>&nbsp;&nbsp;inputType: "checkbox",<br>&nbsp;&nbsp;inputOptions: [<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "Email notifications", value: "email" },<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "SMS notifications", value: "sms" },<br>&nbsp;&nbsp;&nbsp;&nbsp;{ text: "Deleteheads newsletter", value: "push" }<br>&nbsp;&nbsp;],<br>&nbsp;&nbsp;callback: function(result) { /* Handle result */ }<br>});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dialog Examples -->
+    <section class="demo-section">
+      <h2>Custom Dialogs</h2>
+      <p>Flexible dialogs with custom buttons, styling, and behavior.</p>
+
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Custom Buttons</h4>
+          <button class="btn btn-secondary btn-demo" onclick="customButtonsDialog()">Show Custom Dialog</button>
+          <div class="code-example">toastbox.dialog({<br>&nbsp;&nbsp;title: "Choose Your Fate",<br>&nbsp;&nbsp;message: "What next?",<br>&nbsp;&nbsp;buttons: {<br>&nbsp;&nbsp;&nbsp;&nbsp;save: { label: "Save", className: "btn-success", callback: function() {} },<br>&nbsp;&nbsp;&nbsp;&nbsp;edit: { label: "Edit", className: "btn-warning", callback: function() {} },<br>&nbsp;&nbsp;&nbsp;&nbsp;delete: { label: "Delete", className: "btn-danger", callback: function() {} },<br>&nbsp;&nbsp;&nbsp;&nbsp;cancel: { label: "Cancel", className: "btn-outline-secondary", callback: function() {} }<br>&nbsp;&nbsp;}<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Large Dialog</h4>
+          <button class="btn btn-secondary btn-demo" onclick="largeDialog()">Show Large Dialog</button>
+          <div class="code-example">toastbox.dialog({<br>&nbsp;&nbsp;title: "Large Dialog",<br>&nbsp;&nbsp;message: "&lt;h5&gt;This is a large dialog&lt;/h5&gt;&lt;p&gt;Large dialogs are cool for displaying more content, forms, or detailed information.&lt;/p&gt;",<br>&nbsp;&nbsp;size: "large",<br>&nbsp;&nbsp;buttons: { ok: { label: "Close", className: "btn-primary" } }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Small Dialog</h4>
+          <button class="btn btn-secondary btn-demo" onclick="smallDialog()">Show Small Dialog</button>
+          <div class="code-example">toastbox.dialog({<br>&nbsp;&nbsp;title: "Small Dialog",<br>&nbsp;&nbsp;message: "This is a compact dialog for quick notifications or simple confirmations.",<br>&nbsp;&nbsp;size: "small",<br>&nbsp;&nbsp;buttons: { ok: { label: "OK", className: "btn-primary" } }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Centered Dialog</h4>
+          <button class="btn btn-secondary btn-demo" onclick="centeredDialog()">Show Centered Dialog</button>
+          <div class="code-example">toastbox.dialog({<br>&nbsp;&nbsp;title: "Centered Dialog",<br>&nbsp;&nbsp;message: "This dialog is vertically centered on the screen. Neat.",<br>&nbsp;&nbsp;centerVertical: true,<br>&nbsp;&nbsp;buttons: { ok: { label: "Nice!", className: "btn-primary" } }<br>});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configuration Examples -->
+    <section class="demo-section">
+      <h2>Configuration & Features</h2>
+      <p>Advanced features and configuration options.</p>
+
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Disable Animation</h4>
+          <button class="btn btn-success btn-demo" onclick="noAnimationDialog()">Show No Animation</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;title: "No Animation",<br>&nbsp;&nbsp;message: "This dialog appears instantly without the fade-in animation.",<br>&nbsp;&nbsp;animate: false<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Custom CSS Classes</h4>
+          <button class="btn btn-success btn-demo" onclick="customClassDialog()">Show Custom Class</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;title: "Custom Styling",<br>&nbsp;&nbsp;message: "This dialog has custom CSS classes applied for unique styling.",<br>&nbsp;&nbsp;className: "border-success shadow-lg",<br>&nbsp;&nbsp;buttons: { ok: { label: "Stylish!", className: "btn-success" } }<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Without Close Button</h4>
+          <button class="btn btn-success btn-demo" onclick="noCloseDialog()">Show No Close Button</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;title: "No Close Button??",<br>&nbsp;&nbsp;message: "This dialog doesn't have the X close button in the header. Users must use the OK button to dismiss it. Wow.",<br>&nbsp;&nbsp;closeButton: false<br>});</div>
+        </div>
+
+        <div class="demo-item">
+          <h4>Backdrop Options</h4>
+          <button class="btn btn-success btn-demo" onclick="backdropDialog()">Show Backdrop Demo</button>
+          <div class="code-example">toastbox.alert({<br>&nbsp;&nbsp;title: "Backdrop Demo",<br>&nbsp;&nbsp;message: "Try clicking on the background (backdrop) behind this dialog. It should dismiss the dialog.",<br>&nbsp;&nbsp;backdrop: true,<br>&nbsp;&nbsp;onHide: function() { /* Handle hide event */ }<br>});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="demo-section">
+      <h2>Demo Results</h2>
+      <p>See the results of your interactions with the dialogs above.</p>
+      <div id="results" class="alert alert-info">
+        <strong>Demo Results:</strong> Results from your interactions will appear here.
+      </div>
+    </section>
+
+    <!-- Features List -->
+    <section class="demo-section">
+      <h2>✨ Key Features</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="features-list">
+            <li>Bootstrap 5.3.7+ compatible</li>
+            <li>No jQuery dependency</li>
+            <li>Multiple input types</li>
+            <li>Fully customizable buttons</li>
+            <li>Callback support</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="features-list">
+            <li>Accessibility features</li>
+            <li>Custom styling options</li>
+            <li>Form validation</li>
+            <li>Modal sizing options</li>
+            <li><s>Part of a balanced breakfast</s></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-4 mt-5">
+    <div class="container">
+      <p class="text-muted mb-0">We added a footer to this page for some reason</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Toastbox -->
+  <script src="../toastbox.js"></script>
+
+  <!-- Cool Demo Script -->
+  <script src="demo.js"></script>
+</body>
+</html>
